@@ -1,0 +1,67 @@
+# Task 1 
+curl -X POST "http://127.0.0.1:8000/process_image/" \
+  -H "Authorization: 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" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "image": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
+        "prompt": "a cat sitting on a bench",
+        "color": "black"
+      }'
+
+
+curl -X 'POST' \
+  'http://127.0.0.1:8000/process_image/' \
+  -H "Authorization: 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" \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "image": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
+  "prompt": "a cat sitting on a bench",
+  "color": "black"
+}'
+
+
+
+curl -X POST 'http://127.0.0.1:8000/process_image/' \
+-H "Content-Type: application/json" \
+-d '{
+  "key": "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",
+  "prompt": "a cat sitting on a bench",
+  "negative_prompt": null,
+  "init_image": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
+  "width": "512",
+  "height": "512",
+  "samples": "1",
+  "num_inference_steps": "30",
+  "safety_checker": "no",
+  "enhance_prompt": "yes",
+  "guidance_scale": 7.5,
+  "strength": 0.7,
+  "seed": null,
+  "webhook": null,
+  "track_id": null
+}'
+
+
+
+
+
+
+curl -X POST http://127.0.0.1:8000/process_image/ -H "Content-Type: application/json" -d @trial.json
+
+
+https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png
+
+D:/codes/tolga/interview_ADcreative/profile_pp.png
+
+
+curl -X POST http://127.0.0.1:8000/generate-image/ -H "Content-Type: application/json" -d @task_two.json
+
+#Task 2 API CURL
+curl -X POST -H "Content-Type: application/json" -d '{
+    "logo": "D:/codes/tolga/interview_ADcreative/profile_pp.png",
+    "button_color": "#FF0000",
+    "punchline_color": "#0000FF",
+    "punchline": "This is the punchline text",
+    "button": "Click Me"
+}' http://127.0.0.1:8000/generate-image/

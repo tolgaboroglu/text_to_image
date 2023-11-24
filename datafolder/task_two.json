@@ -1,0 +1,7 @@
+{
+    "logo": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
+    "button_color": "#FF0000",
+    "punchline_color": "#0000FF",
+    "punchline": "This is the punchline text",
+    "button": "Click Me"
+  }
