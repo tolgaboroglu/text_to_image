@@ -7,3 +7,5 @@ pydantic
 imgkit==1.2.3
 numpy>=1.1.0
 opencv-python==4.8.1.78
+h11>=0.13
+httpcore>=0.15.0,<0.18.0
