@@ -153,7 +153,7 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
             'quiet': ''
         }
 
-        config = imgkit.config(wkhtmltoimage='./wkhtmltoimage/bin/wkhtmltoimage.exe')
+        config = imgkit.config(wkhtmltoimage='/wkhtmltoimage/bin/wkhtmltoimage.exe')
         # Use the config in your imgkit.from_string() call
         img = imgkit.from_string(html_content, False, options=options, config=config)
         
