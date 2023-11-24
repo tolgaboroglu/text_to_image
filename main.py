@@ -153,7 +153,7 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
             'quiet': ''
         }
 
-        config = imgkit.config(wkhtmltoimage='wkhtmltopdf/bin/wkhtmltoimage.exe')
+        config = imgkit.config(wkhtmltoimage='./wkhtmltoimage/bin/wkhtmltoimage.exe')
         # Use the config in your imgkit.from_string() call
         img = imgkit.from_string(html_content, False, options=options, config=config)
         
@@ -164,7 +164,7 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
         print(e)
 
 def run():
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=80)
 
 if __name__ == "__main__":
     run()
