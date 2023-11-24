@@ -21,6 +21,9 @@ RUN apt-get install -y wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Upgrade pip
+RUN pip install --upgrade pip
+
 # Set the working directory in the container
 WORKDIR /app
 
