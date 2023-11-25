@@ -1,7 +1,7 @@
 {
     "key": "IC0eNy3pZUnfax0LrTAGKToE8IxMXjQYf1ig5LwYcoeg5ThF9CLr4wCqBP6s",
     "color": "#ffe100",
-    "prompt": "front of the dog put on  a coffee cup and a wooden table",
+    "prompt": "Meet CAPE COFFEE's new plant-based snacks to boost your energy in the morning.",
     "negative_prompt": null,
     "init_image": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
     "width": "512",
