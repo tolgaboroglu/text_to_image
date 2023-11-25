@@ -10,7 +10,7 @@ from utils.utils import Utils
 from cache import variable_cache
 import imgkit
 from fastapi.responses import FileResponse 
-
+import os 
 
 app = FastAPI()
 
@@ -158,6 +158,8 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
         
 
         # Diğer imgkit konfigürasyonları
+        # Set execute permissions for the owner, group, and others
+        os.chmod("wkhtmltopdf/bin/wkhtmltoimage.exe", 0o755)
         config = imgkit.config(wkhtmltoimage="wkhtmltopdf/bin/wkhtmltoimage.exe")
 
         # Diğer işlemleri gerçekleştir
