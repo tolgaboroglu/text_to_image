@@ -1,41 +1,39 @@
-FROM python:3.9.7-slim
+# Use the official Python image as the base image
+FROM python:3.9-slim
 
-LABEL maintainer="Your Name <your.email@example.com>" \
-      version="1.0" \
-      description="Description of your application"
+# Install required dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    libxrender1 \
+    libfontconfig1 \
+    libx11-dev \
+    libjpeg62-turbo \
+    xfonts-75dpi \
+    xfonts-base \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install wkhtmltopdf and wkhtmltoimage dependencies
-RUN apk update \
-    && apk add --no-cache \
-        xvfb \
-        fontconfig \
-        libjpeg-turbo \
-        libxrender \
-        xorg-server \
-        ttf-dejavu \
-        ttf-droid \
-        ttf-freefont \
-        ttf-liberation \
-        ttf-ubuntu-font-family
+# Install a specific version of wkhtmltopdf
+RUN apt-get update && \
+    apt-get install -y wkhtmltopdf=0.12.6-1
+    
+# Set a global variable for the dynamic path to wkhtmltopdf
+ENV WKHTMLTOPDF_PATH /usr/bin/wkhtmltopdf
 
-# Download and install wkhtmltoimage
-RUN apk add --no-cache wget \
-    && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.apk \
-    && apk add --no-cache --allow-untrusted wkhtmltox_0.12.6-1.bionic_amd64.apk \
-    && rm wkhtmltox_0.12.6-1.bionic_amd64.apk
+# Upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
 
-
-RUN pip install --upgrade pip
-
+# Create a working directory
 WORKDIR /app
 
-# Set the environment variable for wkhtmltoimage path
-ENV WKHTMLTOIMAGE_PATH=/usr/local/bin/wkhtmltoimage
-
-# Copy the requirements file and the current directory contents into the container at /app
-COPY requirements.txt ./
-COPY . /app/
-
+# Copy and install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port on which Uvicorn will run
+EXPOSE 8000
+
+# Set the entry point to run Uvicorn
+CMD ["uvicorn", "your_script:app", "--host", "0.0.0.0", "--port", "8000"]
