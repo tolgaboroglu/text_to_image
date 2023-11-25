@@ -10,12 +10,11 @@ from utils.utils import Utils
 from cache import variable_cache
 import imgkit
 from fastapi.responses import FileResponse 
-import os
+
 
 app = FastAPI()
 
-# Get the path to wkhtmltoimage from the environment variable, with a default value
-wkhtmltoimage_path = os.environ.get("WKHTMLTOPDF_PATH")
+
 class ImageProcessRequest(BaseModel):
     key:str =""
     color: str
@@ -159,19 +158,19 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
         
 
         # Diğer imgkit konfigürasyonları
-        config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
+        config = imgkit.config(wkhtmltoimage="wkhtmltopdf/bin/wkhtmltoimage.exe")
 
         # Diğer işlemleri gerçekleştir
         img = imgkit.from_string(html_content, False, options=options, config=config)
 
         # Resmi Response olarak döndür
-        return Response(content=img, media_type="image/png", status=200)
+        return Response(content=img, media_type="image/png", status_code=200)
 
     except Exception as e:
         return str(e), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
     
 ## <img class="logo" src="{html_variable.logo}" alt="Logo">
 #  <img class="image" src="{variable_cache.gen_image}" alt="Product Image">
