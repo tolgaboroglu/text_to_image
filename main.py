@@ -9,10 +9,13 @@ from PIL import Image
 from utils.utils import Utils
 from cache import variable_cache
 import imgkit
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse 
+import os
 
 app = FastAPI()
 
+# Get the path to wkhtmltoimage from the environment variable, with a default value
+wkhtmltoimage_path = os.getenv("WKHTMLTOIMAGE_PATH", "/usr/local/bin/wkhtmltoimage")
 class ImageProcessRequest(BaseModel):
     key:str =""
     color: str
@@ -153,21 +156,23 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
             'quiet': ''
         }
 
-        config = imgkit.config(wkhtmltoimage='C:/Program Files/wkhtmltopdf/bin/wkhtmltoimage.exe')
-        # Use the config in your imgkit.from_string() call
+        # Scriptin bulunduğu dizindeki 'wkhtmltoimage.exe' dosyasını ara
+        wkhtmltoimage_path = os.path.join(os.path.dirname(__file__), 'wkhtmltoimage.exe')
+
+        # Diğer imgkit konfigürasyonları
+        config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
+
+        # Diğer işlemleri gerçekleştir
         img = imgkit.from_string(html_content, False, options=options, config=config)
-        
-        # Return the image file as response
-        return Response(content=img, media_type="image/png",status_code=200) 
+
+        # Resmi Response olarak döndür
+        return Response(content=img, media_type="image/png", status=200)
 
     except Exception as e:
-        print(e)
-
-def run():
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+        return str(e), 500
 
 if __name__ == "__main__":
-    run()
-
+    app.run(host="0.0.0.0", port=8000)
+    
 ## <img class="logo" src="{html_variable.logo}" alt="Logo">
 #  <img class="image" src="{variable_cache.gen_image}" alt="Product Image">
