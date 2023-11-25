@@ -15,7 +15,7 @@ import os
 app = FastAPI()
 
 # Get the path to wkhtmltoimage from the environment variable, with a default value
-wkhtmltoimage_path = os.getenv("WKHTMLTOIMAGE_PATH", "/usr/local/bin/wkhtmltoimage")
+wkhtmltoimage_path = os.getenv("WKHTMLTOPDF_PATH", "/usr/bin/wkhtmltopdf")
 class ImageProcessRequest(BaseModel):
     key:str =""
     color: str
@@ -156,8 +156,7 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
             'quiet': ''
         }
 
-        # Scriptin bulunduğu dizindeki 'wkhtmltoimage.exe' dosyasını ara
-        wkhtmltoimage_path = os.path.join(os.path.dirname(__file__), 'wkhtmltoimage.exe')
+        
 
         # Diğer imgkit konfigürasyonları
         config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
