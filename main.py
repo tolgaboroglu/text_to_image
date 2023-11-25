@@ -15,7 +15,7 @@ import os
 app = FastAPI()
 
 # Get the path to wkhtmltoimage from the environment variable, with a default value
-wkhtmltoimage_path = os.getenv("WKHTMLTOPDF_PATH", "/usr/bin/wkhtmltopdf")
+wkhtmltoimage_path = os.environ.get("WKHTMLTOPDF_PATH")
 class ImageProcessRequest(BaseModel):
     key:str =""
     color: str
