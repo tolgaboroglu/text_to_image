@@ -153,23 +153,21 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
             'quiet': ''
         }
 
-        # Scriptin bulunduğu dizindeki 'wkhtmltoimage.exe' dosyasını ara
-        wkhtmltoimage_path = os.path.join(os.path.dirname(__file__), 'wkhtmltoimage.exe')
-
-        # Diğer imgkit konfigürasyonları
-        config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
-
-        # Diğer işlemleri gerçekleştir
+        config = imgkit.config(wkhtmltoimage='C:/Program Files/wkhtmltopdf/bin/wkhtmltoimage.exe')
+        # Use the config in your imgkit.from_string() call
         img = imgkit.from_string(html_content, False, options=options, config=config)
-
-        # Resmi Response olarak döndür
-        return Response(content=img, media_type="image/png", status=200)
+        
+        # Return the image file as response
+        return Response(content=img, media_type="image/png",status_code=200) 
 
     except Exception as e:
-        return str(e)
+        print(e)
+
+def run():
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    run()
 
 ## <img class="logo" src="{html_variable.logo}" alt="Logo">
 #  <img class="image" src="{variable_cache.gen_image}" alt="Product Image">
