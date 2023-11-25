@@ -20,7 +20,7 @@ options = {
 }
 
 # Replace '/path/to/wkhtmltoimage' with the actual path where wkhtmltoimage is installed
-wkhtmltoimage_path = '/usr/bin/wkhtmltoimage'
+wkhtmltoimage_path = 'wkhtmltoimage.exe'
 
 config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
 
