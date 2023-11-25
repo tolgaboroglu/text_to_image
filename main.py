@@ -166,7 +166,7 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
         return Response(content=img, media_type="image/png", status=200)
 
     except Exception as e:
-        return str(e), 500
+        return str(e)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8000)
