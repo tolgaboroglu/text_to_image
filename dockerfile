@@ -28,7 +28,8 @@ WORKDIR /app
 # Copy and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN chmod +x /wkhtmltopdf/bin/wkhtmltoimage.exe
+
+RUN chmod +x /app/wkhtmltopdf/bin/wkhtmltoimage.exe
 
 # Copy the rest of the application code
 COPY . .
