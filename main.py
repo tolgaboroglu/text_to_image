@@ -156,11 +156,11 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
         }
 
         
-
         # Diğer imgkit konfigürasyonları
         # Set execute permissions for the owner, group, and others
-        os.chmod("wkhtmltopdf/bin/wkhtmltoimage.exe", 0o755)
-        config = imgkit.config(wkhtmltoimage="wkhtmltopdf/bin/wkhtmltoimage.exe")
+        wkhtmltoimage_path = "wkhtmltopdf/bin/wkhtmltoimage.exe"
+        os.chmod(wkhtmltoimage_path, 0o755)
+        config = imgkit.config(wkhtmltoimage=wkhtmltoimage_path)
 
         # Diğer işlemleri gerçekleştir
         img = imgkit.from_string(html_content, False, options=options, config=config)
@@ -170,6 +170,34 @@ async def generate_image(request: Request,html_variable :HtmlTemplateModel):
 
     except Exception as e:
         return str(e), 500
+
+
+@app.post("/generate-and-process-image/")
+async def generate_and_process_image(request: Request, html_variable: HtmlTemplateModel,
+                                    image_process_request: ImageProcessRequest):
+    try:
+        # Generate image from HTML content
+        img_response = await generate_image(request, html_variable)
+
+        # Process the generated image
+        response = await perform_image_processing(image_process_request)
+
+        if response.status_code == 200:
+            try:
+                # Save the image
+                with open("output_image.png", "wb") as image_file:
+                    image_file.write(img_response.content)
+
+                return Response(content=img_response.content, media_type="image/png", status_code=200)
+
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Failed to process image: {str(e)}")
+
+        raise HTTPException(status_code=response.status_code, detail="Image processing failed")
+
+    except Exception as e:
+        return str(e), 500
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
