@@ -15,7 +15,7 @@ RUN apt-get update && \
 # Install a specific version of wkhtmltopdf
 RUN apt-get update && \
     apt-get install -y wkhtmltopdf=0.12.6-1
-    
+
 # Set a global variable for the dynamic path to wkhtmltopdf
 ENV WKHTMLTOPDF_PATH /usr/bin/wkhtmltopdf
 
@@ -28,6 +28,7 @@ WORKDIR /app
 # Copy and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN chmod +x /wkhtmltopdf/bin/wkhtmltoimage.exe
 
 # Copy the rest of the application code
 COPY . .
