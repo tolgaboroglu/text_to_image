@@ -6,9 +6,13 @@ In this project, we utilized the Stable Diffusion API alongside the FastAPI fram
 
 # Technologies Used
 FastAPI Framework: FastAPI was chosen for its ease of use and high performance, allowing for efficient development of web applications with Python.
+
 uvicorn Web Server: uvicorn was used as the ASGI server to run the FastAPI application.
+
 Pythonic Libraries: Various Python libraries were utilized throughout the project, including HTTPX for making HTTP requests, Pillow for image manipulation, and imgkit for converting HTML to images.
+
 Render Cloud Provider: Render was chosen as the cloud provider for deployment due to its simplicity and ease of use.
+
 # Project Workflow
 Initial Setup: The project began with researching and implementing the Stable Diffusion API within the FastAPI framework. This involved creating base model schemas and verifying the functionality through API testing.
 
