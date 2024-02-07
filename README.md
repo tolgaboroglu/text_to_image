@@ -29,3 +29,4 @@ To access the deployed application, visit example.com.
 This project demonstrates the integration of the Stable Diffusion API within the FastAPI framework to create a web application capable of generating and manipulating images based on specific tasks. By leveraging various technologies and libraries, we were able to efficiently develop and deploy the application for widespread use.
 
 For more details and usage instructions, please refer to the documentation and source code.
+![output_image](https://github.com/tolgaboroglu/creative/assets/46046034/6beb5f8f-bbf0-41a6-a72c-d3ec09fca60b)
