@@ -23,7 +23,7 @@ To run the application locally, follow these steps:
 
 Install the necessary dependencies by running pip install -r requirements.txt.
 Run the FastAPI application using uvicorn: uvicorn main:app --reload.
-To access the deployed application, visit example.com.
+To access the deployed application.
 
 # Conclusion
 This project demonstrates the integration of the Stable Diffusion API within the FastAPI framework to create a web application capable of generating and manipulating images based on specific tasks. By leveraging various technologies and libraries, we were able to efficiently develop and deploy the application for widespread use.
