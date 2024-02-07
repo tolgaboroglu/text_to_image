@@ -30,4 +30,6 @@ This project demonstrates the integration of the Stable Diffusion API within the
 
 For more details and usage instructions, please refer to the documentation and source code.
 
+Linkedin post : https://www.linkedin.com/posts/tolgaboroglu_texttoimage-texttoimage-fastapi-activity-7161009445630554112-dhHZ?utm_source=share&utm_medium=member_desktop
+
 ![output_image](https://github.com/tolgaboroglu/creative/assets/46046034/6beb5f8f-bbf0-41a6-a72c-d3ec09fca60b)
